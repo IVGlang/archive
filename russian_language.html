@@ -8,7 +8,7 @@
   #main {
    display:grid;
    grid-template-columns:1fr;
-   grid-gap:0.4em;
+   grid-gap:0.3em;
   }
  </style>
  <script src="data.json"></script>
@@ -17,7 +17,37 @@
    var main = document.getElementById("main");
    for (i in russian_language) {
      if (russian_language[i][0] == "table") {
+       table = document.createElement("table");
+       table.style.border = "1px solid black";
+       table.cols = 2;
 
+       tr1 = document.createElement("tr");
+       for (n in russian_language[i][1]) {
+         th = document.createElement("th");
+         th.style.border = "1px solid black";
+         th.appendChild(document.createTextNode(russian_language[i][1][n]));
+         tr1.appendChild(th);
+       }
+       table.appendChild(tr1);
+
+       tr2 = document.createElement("tr");
+       for (n in russian_language[i][2]) {
+         td = document.createElement("td");
+         td.style.border = "1px solid black";
+         for (l in russian_language[i][2][n]) {
+           if (russian_language[i][2][n][l][0] == "list") {
+             for (q in russian_language[i][2][n][l][1]) {
+               p = document.createElement("div");
+               p.appendChild(document.createTextNode(russian_language[i][2][n][l][1][q]));
+               td.appendChild(p);
+             }
+           }
+         }
+         tr2.appendChild(td);
+       }
+       table.appendChild(tr2);
+
+       main.appendChild(table);
      } else if (russian_language[i][0] == "list") {
        p = document.createElement("div");
 
@@ -34,6 +64,7 @@
 
        main.appendChild(p);
      } else if (russian_language[i][0] == "p") {
+       console.log(russian_language[i]);
        p = document.createElement("div");
 
        title = document.createElement("strong");
@@ -52,24 +83,6 @@
  </script>
 </head>
 <body>
-  <!--<p><table border="1px" width="100%">
-   <tr>
-    <th>Типы речи</th>
-    <th>Стили речи</th>
-   </tr>
-   <tr>
-    <td>
-     1. Повествование<br>
-     2. Описание<br>
-     3. Рассуждение
-    </td>
-    <td>
-     1. Разговорный<br>
-     2. Книжный<br>
-     (Официально-деловой<br>Публицистический<br> Научный <br>Художественный)
-    </td>
-   </tr>
-  </table></p>-->
   <!--<p><table border="1px" width="100%">
    <tr>
     <th>Тире между подлежащим и сказуемым ставится</th>
