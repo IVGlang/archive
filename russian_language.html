@@ -5,36 +5,47 @@
  <meta charset="UTF-8">
  <meta name="viewport" content="width=device-width, initial-scale=1.0">
  <style>
- #main {
-  display:grid;
-  grid-template-columns:1fr;
- }
+  #main {
+   display:grid;
+   grid-template-columns:1fr;
+   grid-gap:0.4em;
+  }
  </style>
  <script src="data.json"></script>
  <script>
   window.onload = function() {
    var main = document.getElementById("main");
    for (i in russian_language) {
-     if (i == "tables") {
-       for (n in russian_language[i]) {
-         console.log(russian_language[i][n]);
-       }
-     } else if (i == "paragraphs") {
-       for (n in russian_language[i]) {
-         console.log(russian_language[i][n]);
-         p = document.createElement("p");
+     if (russian_language[i][0] == "table") {
 
-         title = document.createElement("strong");
-         title.appendChild(document.createTextNode(russian_language[i][n][0]));
+     } else if (russian_language[i][0] == "list") {
+       p = document.createElement("div");
 
+       title = document.createElement("strong");
+       title.appendChild(document.createTextNode(russian_language[i][1]));
+       p.appendChild(title);
+
+       for (n in russian_language[i][2]) {
+         p.appendChild(document.createElement("br"));
          text = document.createElement("span");
-         text.appendChild(document.createTextNode(" - "));
-         text.appendChild(document.createTextNode(russian_language[i][n][1]));
-
-         p.appendChild(title);
+         text.appendChild(document.createTextNode(russian_language[i][2][n]));
          p.appendChild(text);
-         main.appendChild(p);
        }
+
+       main.appendChild(p);
+     } else if (russian_language[i][0] == "p") {
+       p = document.createElement("div");
+
+       title = document.createElement("strong");
+       title.appendChild(document.createTextNode(russian_language[i][1]));
+       p.appendChild(title);
+
+       text = document.createElement("span");
+       text.appendChild(document.createTextNode(" - "));
+       text.appendChild(document.createTextNode(russian_language[i][2]));
+       p.appendChild(text);
+
+       main.appendChild(p);
      }
    }
   };
@@ -85,14 +96,6 @@
     <td>Трижды пять - пятнадцать. Сила ветра - пять метров в секунду.</td>
    </tr>
   </table></p>-->
-  <!--<p><strong>Очерк</strong> - небольшое литературное произведение, краткок описание жизненных событий (обычно социально значимых). Очерки бываюь документальные, публицтстические, бытовые.</p>
-  <p><strong>Интервью</strong> - жанр публицистики, представляющий собой беседу журналиста с одним или несколькими лицами по вопросам, имеющим актуальное значение.</p>
-  <p><strong>Научный стиль</strong> - употребляется  в сфере науки, образования, производства в писменной и устной речи. Подстили:<br>1. Собственно научный - доказать обретённую научную истинну.<br>2. Научно-учебный - сообщить об уже известных научных истинах.<br>3. Научно-порулярный - доступно изложить научные идеи, открытия и т.д.</p>
-  <p><strong>Согласование</strong> - это такой вид подчинительной связи, при котором зависимое слово ставится в той же форме, что и главное т.е согласуется с главным словом в роде, числе и падеже или в числе и падеже. При согласовании с изменением формв главного слоаа соответсвенно изменяется и формв зависимиого слова.</p>
-  <p><strong>Управление</strong> - это такой вид подчинительной связи, при котором зависимое слово ставится при главном слове в определённом палеже независимо от того в какой форме стоит глвное (косвенные падежи). При управлении с изменением форм главного слова зависимое слово не изменяется (остаётся в том же падеже).
-  <p><strong>Примыкание</strong> - это такой вид подчинительной связи, при котором в роли зависимого слова выступает неизменяемые слова: наречия, деепричастия, неопределённая форма глагола и прятежательные местоимения его, её, их. В словосочетании со связью приымыкание зависимое неизменяемое слово соединяется с главным только по смыслу.</p>-->
- <div id="main">
-  
- </div>
+ <div id="main"></div>
 </body>
 </html>
