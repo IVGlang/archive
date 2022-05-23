@@ -11,7 +11,7 @@
    grid-gap:0.3em;
   }
  </style>
- <script src="data.json"></script>
+ <script src="data.js"></script>
  <script>
   window.onload = function() {
    var main = document.getElementById("main");
@@ -19,33 +19,6 @@
      if (russian_language[i][0] == "table") {
        table = document.createElement("table");
        table.style.border = "1px solid black";
-       table.cols = 2;
-
-       tr1 = document.createElement("tr");
-       for (n in russian_language[i][1]) {
-         th = document.createElement("th");
-         th.style.border = "1px solid black";
-         th.appendChild(document.createTextNode(russian_language[i][1][n]));
-         tr1.appendChild(th);
-       }
-       table.appendChild(tr1);
-
-       tr2 = document.createElement("tr");
-       for (n in russian_language[i][2]) {
-         td = document.createElement("td");
-         td.style.border = "1px solid black";
-         for (l in russian_language[i][2][n]) {
-           if (russian_language[i][2][n][l][0] == "list") {
-             for (q in russian_language[i][2][n][l][1]) {
-               p = document.createElement("div");
-               p.appendChild(document.createTextNode(russian_language[i][2][n][l][1][q]));
-               td.appendChild(p);
-             }
-           }
-         }
-         tr2.appendChild(td);
-       }
-       table.appendChild(tr2);
 
        main.appendChild(table);
      } else if (russian_language[i][0] == "list") {
@@ -83,32 +56,6 @@
  </script>
 </head>
 <body>
-  <!--<p><table border="1px" width="100%">
-   <tr>
-    <th>Тире между подлежащим и сказуемым ставится</th>
-    <th>Пример</th>
-   </tr>
-   <tr>
-    <td>1. На месте отсутствующего глагола-связки, если подлежащикк и сказуемое выражены<strong> именем существительным в форме И.п</strong></td>
-    <td>Земля - планета. Москва - столица России.</td>
-   </tr>
-   <tr>
-    <td>2. Если подлежащее и сказуемое выражены <strong>инфинитивом</strong>.</td>
-    <td>Без дела жить - только себе коптить.</td>
-   </tr>
-   <tr>
-    <td>3. Если один из главных членов выражен <strong>инфинитивом</strong>, а другой - <strong>именем существительным в форме И.п</strong>.</td>
-    <td>Быть, а не казаться - девиз, который должен носить в своём сердце каждый гражданин.</td>
-   </tr>
-   <tr>
-    <td>4. Если перед сказуемым,  выраженным инфинитивом или именем существительным, стоят слова <strong>это, это есть, это значит, вот</strong>.</td>
-    <td>Кремль - это центральная часть древнерусских городов.</td>
-   </tr>
-   <tr>
-    <td>Если оба главных члена предложения выражены <strong>количественным числительным</strong> или если один из низ выражен <strong>именем существительным в И. п</strong>, а другой - <strong>именем числительным</strong> или <strong>оборотом с числительным</atrong>.</td>
-    <td>Трижды пять - пятнадцать. Сила ветра - пять метров в секунду.</td>
-   </tr>
-  </table></p>-->
  <div id="main"></div>
 </body>
 </html>
