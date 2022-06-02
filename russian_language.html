@@ -20,36 +20,77 @@
        table = document.createElement("table");
        table.style.border = "1px solid black";
 
-       main.appendChild(table);
-     } else if (russian_language[i][0] == "list") {
-       p = document.createElement("div");
-
-       title = document.createElement("strong");
-       title.appendChild(document.createTextNode(russian_language[i][1]));
-       p.appendChild(title);
+       title = document.createElement("tr");
+       for (n in russian_language[i][1]) {
+         th = document.createElement("th");
+         th.appendChild(document.createTextNode(russian_language[i][1][n]))
+         th.style.border = "1px solid black";
+         title.appendChild(th);
+       }
+       table.appendChild(title);
 
        for (n in russian_language[i][2]) {
-         p.appendChild(document.createElement("br"));
-         text = document.createElement("span");
-         text.appendChild(document.createTextNode(russian_language[i][2][n]));
-         p.appendChild(text);
+         tr = document.createElement("tr");
+         tr.style.border = "1px solid black";
+         for (l in russian_language[i][2][n]) {
+           td = document.createElement("td");
+           td.style.border = "1px solid black";
+           for (k in russian_language[i][2][n][l]) {
+             if (russian_language[i][2][n][l][k][0] == "list") {
+               for (v in russian_language[i][2][n][l][k][1]) {
+                 span = document.createElement("span");
+                 span.appendChild(document.createTextNode(russian_language[i][2][n][l][k][1][v]));
+                 td.appendChild(span);
+                 td.appendChild(document.createElement("br"));
+               }
+             } else if (russian_language[i][2][n][l][k][0] == "span") {
+               for (v in russian_language[i][2][n][l][k][1]) {
+                 if (russian_language[i][2][n][l][k][1][v][0] == "span") {
+                   span = document.createElement("span");
+                   span.appendChild(document.createTextNode(russian_language[i][2][n][l][k][1][v][1]));
+                   td.appendChild(span);
+                 } else if (russian_language[i][2][n][l][k][1][v][0] == "strong") {
+                   strong = document.createElement("strong");
+                   strong.appendChild(document.createTextNode(russian_language[i][2][n][l][k][1][v][1]));
+                   td.appendChild(strong);
+                 }
+               }
+             }
+           }
+           tr.appendChild(td);
+         }
+         table.appendChild(tr);
        }
 
-       main.appendChild(p);
-     } else if (russian_language[i][0] == "p") {
-       console.log(russian_language[i]);
-       p = document.createElement("div");
+       main.appendChild(table);
+     } else if (russian_language[i][0] == "list") {
+       div = document.createElement("div");
 
        title = document.createElement("strong");
        title.appendChild(document.createTextNode(russian_language[i][1]));
-       p.appendChild(title);
+       div.appendChild(title);
 
-       text = document.createElement("span");
-       text.appendChild(document.createTextNode(" - "));
-       text.appendChild(document.createTextNode(russian_language[i][2]));
-       p.appendChild(text);
+       for (n in russian_language[i][2]) {
+         div.appendChild(document.createElement("br"));
+         span = document.createElement("span");
+         span.appendChild(document.createTextNode(russian_language[i][2][n]));
+         div.appendChild(span);
+       }
 
-       main.appendChild(p);
+       main.appendChild(div);
+     } else if (russian_language[i][0] == "p") {
+       div = document.createElement("div");
+
+       title = document.createElement("strong");
+       title.appendChild(document.createTextNode(russian_language[i][1]));
+       div.appendChild(title);
+
+       span = document.createElement("span");
+       span.appendChild(document.createTextNode(" - "));
+       span.appendChild(document.createTextNode(russian_language[i][2]));
+       div.appendChild(span);
+
+       main.appendChild(div);
      }
    }
   };
